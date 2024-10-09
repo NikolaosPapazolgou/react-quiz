@@ -1,4 +1,3 @@
-import { useEffect, useReducer } from 'react';
 import Header from './Header.js';
 import Main from './Main.js';
 import Loader from './Loader.js'
@@ -10,7 +9,7 @@ import Progress from "./Progress.js"
 import Finished from './Finished.js'
 import Footer from './Footer.js';
 import Timer from './Timer.js';
-import { useQuestion} from '../../react-quiz/src/hooks/QuestionContextProvider.js';
+import { useQuestion} from '../hooks/QuestionContextProvider.js';
 
 export default function App() {
 
@@ -22,7 +21,6 @@ export default function App() {
   <div className='app'>
     <Header />
     <Main>
-      const {status} = useQuestion();
       {status === 'error' && <Error />}
       {status === 'loading' && <Loader />}
       {status === 'ready' && <StartScreen numQuestions={numQuestions} dispatch={dispatch}/>}

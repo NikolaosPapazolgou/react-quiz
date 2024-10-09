@@ -1,4 +1,4 @@
-import {createContext, useEffect, useReducer } from "react";
+import {createContext, useContext, useEffect, useReducer } from "react";
 const SECS_PER_QUESTION = 30;
 const QuestionContext = createContext();
 const initialState = {
@@ -56,12 +56,12 @@ const initialState = {
          status: 'ready',
          highscore: state.highscore,
        }
-     case 'tick':
-       return{
-         ...state,
-         secondsRemaining: state.secondsRemaining - 1,
-         status: state.secondsRemaining === 0 ? state.status = "finished" : state.status,
-       }
+       case 'tick':
+        return {
+          ...state,
+          secondsRemaining: state.secondsRemaining - 1,
+          status: state.secondsRemaining === 1 ? "finished" : state.status,  // Fix direct state mutation
+        }
      default:
        throw new Error("Invalid action");
   
@@ -91,7 +91,7 @@ function QuestionContextProvider({children}) {
   </QuestionContext.Provider>
 }
 function useQuestion(){
-   const value = useQuestion(QuestionContext);
+   const value = useContext(QuestionContext);
    if(!value) throw new Error("Not in the scope of the QuestionContextProvider");
    return value;
 }
